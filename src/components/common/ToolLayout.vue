@@ -5,14 +5,16 @@
     
     <!-- 自定义导航栏 -->
     <view class="nav-bar">
-      <view class="nav-left" @tap="goBack">
+      <view class="nav-left" @tap="goBack" hover-class="btn-hover">
         <view class="back-arrow"></view>
-        <text class="back-text">返回</text>
+        <text class="back-text">{{ $t('common.nav.back') }}</text>
       </view>
       <view class="nav-title">
         <text class="title-text">{{ title }}</text>
       </view>
-      <view class="nav-right"></view>
+      <view class="nav-right">
+        <slot name="header-right"></slot>
+      </view>
     </view>
     
     <!-- 内容区 -->
@@ -31,7 +33,7 @@ import { ref, onMounted } from 'vue';
 defineProps({
   title: {
     type: String,
-    default: '工具'
+    default: ''
   }
 });
 
@@ -39,11 +41,9 @@ const statusBarHeight = ref(20);
 
 onMounted(() => {
   try {
-    // 使用最新 API 获取窗口信息
     const windowInfo = uni.getWindowInfo();
     statusBarHeight.value = windowInfo.statusBarHeight || 20;
   } catch (e) {
-    // 降级处理
     statusBarHeight.value = 20;
   }
 });
@@ -63,7 +63,7 @@ const goBack = () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #f8fafc;
+  background-color: #fcfcfd;
   width: 100%;
 }
 
@@ -86,7 +86,12 @@ const goBack = () => {
   display: flex;
   align-items: center;
   height: 44px;
-  min-width: 120rpx;
+  min-width: 140rpx;
+  transition: opacity 0.2s;
+}
+
+.btn-hover {
+  opacity: 0.6;
 }
 
 .back-arrow {
@@ -100,23 +105,30 @@ const goBack = () => {
 .back-text {
   font-size: 28rpx;
   color: #334155;
-  margin-left: 10rpx;
+  margin-left: 14rpx;
+  font-weight: 500;
 }
 
 .nav-title {
   flex: 1;
   display: flex;
   justify-content: center;
+  padding: 0 20rpx;
 }
 
 .title-text {
   font-size: 32rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-right {
-  min-width: 120rpx;
+  min-width: 140rpx;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .content-scroll {

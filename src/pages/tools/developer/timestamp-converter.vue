@@ -4,7 +4,7 @@
       <!-- 当前时间 Banner -->
       <view class="current-time-banner shadow-md">
         <text class="time-label">{{ $t('tools.timestamp-converter.currentTs') }}</text>
-        <view class="time-value-row" @tap="handleCopy(currentTimestamp)">
+        <view class="time-value-row" @tap="copy(currentTimestamp)">
           <text class="time-value">{{ currentTimestamp }}</text>
           <text class="copy-icon">📋</text>
         </view>
@@ -19,7 +19,7 @@
         </view>
         <view class="result-display mt-3">
           <text class="res-label">{{ $t('tools.timestamp-converter.resultDate') }}</text>
-          <view class="res-value-row" @tap="handleCopy(dateResult)">
+          <view class="res-value-row" @tap="copy(dateResult)">
             <text class="res-value">{{ dateResult }}</text>
             <text class="res-copy">📋</text>
           </view>
@@ -34,7 +34,7 @@
         </view>
         <view class="result-display mt-3">
           <text class="res-label">{{ $t('tools.timestamp-converter.resultTs') }}</text>
-          <view class="res-value-row" @tap="handleCopy(tsResult)">
+          <view class="res-value-row" @tap="copy(tsResult)">
             <text class="res-value">{{ tsResult }}</text>
             <text class="res-copy">📋</text>
           </view>
@@ -45,25 +45,19 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import ToolLayout from '../../../components/common/ToolLayout.vue';
+import { ref, watch, onMounted } from 'vue';
+import { useTool } from '../../../composables/useTool';
+import { useCurrentTime } from '../../../composables/useCurrentTime';
 import { formatTimestamp, parseDateToTimestamp, getCurrentDateTimeString } from '../../../utils/date';
 
-const { t } = useI18n();
-
-const currentTimestamp = ref(Math.floor(Date.now() / 1000));
-let timer = null;
+const { copy, t } = useTool();
+const { currentTimestamp } = useCurrentTime();
 
 const tsInput = ref(currentTimestamp.value.toString());
 const dateResult = ref('');
 
 const dateInput = ref(getCurrentDateTimeString());
 const tsResult = ref('');
-
-const updateCurrentTime = () => {
-  currentTimestamp.value = Math.floor(Date.now() / 1000);
-};
 
 const convertTsToDate = () => {
   const result = formatTimestamp(tsInput.value);
@@ -75,27 +69,12 @@ const convertDateToTs = () => {
   tsResult.value = result !== null ? result.toString() : t('tools.timestamp-converter.invalidDate');
 };
 
-const handleCopy = (val) => {
-  if (!val || val.includes('无效') || val.includes('Invalid')) return;
-  uni.setClipboardData({
-    data: val.toString(),
-    success: () => {
-      uni.showToast({ title: t('common.actions.copied'), icon: 'success' });
-    }
-  });
-};
-
 watch(tsInput, convertTsToDate);
 watch(dateInput, convertDateToTs);
 
 onMounted(() => {
   convertTsToDate();
   convertDateToTs();
-  timer = setInterval(updateCurrentTime, 1000);
-});
-
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
 });
 </script>
 
