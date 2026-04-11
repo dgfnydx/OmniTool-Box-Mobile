@@ -7,6 +7,7 @@ import safePeriodCalculator from './tools/safe-period-calculator';
 import solarTerms from './tools/solar-terms';
 import timer from './tools/timer';
 import qrGenerator from './tools/qr-generator';
+import colorPalette from './tools/color-palette';
 import jsonFormatter from './tools/json-formatter';
 import base64Converter from './tools/base64-converter';
 import baseConverter from './tools/base-converter';
@@ -29,6 +30,7 @@ export default {
     'solar-terms': solarTerms,
     'timer': timer,
     'qr-generator': qrGenerator,
+    'color-palette': colorPalette,
     'json-formatter': jsonFormatter,
     'base64-converter': base64Converter,
     'base-converter': baseConverter,

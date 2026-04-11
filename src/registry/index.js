@@ -40,6 +40,15 @@ export const TOOLS = [
     path: '/pages/tools/design/qr-generator'
   },
   { 
+    id: 'color-palette', 
+    nameKey: 'tools.color-palette.name', 
+    category: 'design', 
+    emoji: '🎨', 
+    grad: 'linear-gradient(135deg, #ec4899, #8b5cf6)', 
+    descKey: 'tools.color-palette.description',
+    path: '/pages/tools/design/color-palette'
+  },
+  { 
     id: 'unit-converter', 
     nameKey: 'tools.unit-converter.name', 
     category: 'calc', 

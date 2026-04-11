@@ -85,6 +85,13 @@
 			}
 		},
 		{
+			"path": "pages/tools/design/color-palette",
+			"style": {
+				"navigationBarTitleText": "调色盘",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/tools/developer/json-formatter",
 			"style": {
 				"navigationBarTitleText": "JSON 格式化",
