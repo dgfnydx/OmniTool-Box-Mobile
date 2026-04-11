@@ -9,6 +9,8 @@ import timer from './tools/timer';
 import qrGenerator from './tools/qr-generator';
 import jsonFormatter from './tools/json-formatter';
 import base64Converter from './tools/base64-converter';
+import baseConverter from './tools/base-converter';
+import timestampConverter from './tools/timestamp-converter';
 import mortgageCalculator from './tools/mortgage-calculator';
 import unitConverter from './tools/unit-converter';
 import passwordGenerator from './tools/password-generator';
@@ -29,6 +31,8 @@ export default {
     'qr-generator': qrGenerator,
     'json-formatter': jsonFormatter,
     'base64-converter': base64Converter,
+    'base-converter': baseConverter,
+    'timestamp-converter': timestampConverter,
     'mortgage-calculator': mortgageCalculator,
     'unit-converter': unitConverter,
     'password-generator': passwordGenerator,

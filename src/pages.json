@@ -99,6 +99,20 @@
 			}
 		},
 		{
+			"path": "pages/tools/developer/base-converter",
+			"style": {
+				"navigationBarTitleText": "进制转换",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/timestamp-converter",
+			"style": {
+				"navigationBarTitleText": "时间戳转换",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/tools/daily/bmi",
 			"style": {
 				"navigationBarTitleText": "BMI 计算器",

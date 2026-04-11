@@ -130,6 +130,24 @@ export const TOOLS = [
     path: '/pages/tools/developer/base64-converter'
   },
   { 
+    id: 'base-converter', 
+    nameKey: 'tools.base-converter.name', 
+    category: 'developer', 
+    emoji: '101', 
+    grad: 'linear-gradient(135deg, #fbbf24, #f59e0b)', 
+    descKey: 'tools.base-converter.description',
+    path: '/pages/tools/developer/base-converter'
+  },
+  { 
+    id: 'timestamp-converter', 
+    nameKey: 'tools.timestamp-converter.name', 
+    category: 'developer', 
+    emoji: '⏰', 
+    grad: 'linear-gradient(135deg, #6366f1, #8b5cf6)', 
+    descKey: 'tools.timestamp-converter.description',
+    path: '/pages/tools/developer/timestamp-converter'
+  },
+  { 
     id: 'bmi-calc', 
     nameKey: 'tools.bmi-calculator.name', 
     category: 'calc', 
