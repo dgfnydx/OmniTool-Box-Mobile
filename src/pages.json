@@ -1,0 +1,129 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "OmniTool",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/mortgage",
+			"style": {
+				"navigationBarTitleText": "房贷计算器",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/unit-converter",
+			"style": {
+				"navigationBarTitleText": "单位换算",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/password-gen",
+			"style": {
+				"navigationBarTitleText": "随机密码",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/amount-to-uppercase",
+			"style": {
+				"navigationBarTitleText": "数字转大写",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/chinese-converter",
+			"style": {
+				"navigationBarTitleText": "简繁转换",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/pinyin-converter",
+			"style": {
+				"navigationBarTitleText": "汉字转拼音",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/due-date-calculator",
+			"style": {
+				"navigationBarTitleText": "预产期计算",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/safe-period-calculator",
+			"style": {
+				"navigationBarTitleText": "安全期计算",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/solar-terms",
+			"style": {
+				"navigationBarTitleText": "二十四节气",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/timer",
+			"style": {
+				"navigationBarTitleText": "计时器",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/design/qr-generator",
+			"style": {
+				"navigationBarTitleText": "二维码生成",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/json-formatter",
+			"style": {
+				"navigationBarTitleText": "JSON 格式化",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/base64-converter",
+			"style": {
+				"navigationBarTitleText": "Base64 转换",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/bmi",
+			"style": {
+				"navigationBarTitleText": "BMI 计算器",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/bmr",
+			"style": {
+				"navigationBarTitleText": "BMR 计算器",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/daily/roi",
+			"style": {
+				"navigationBarTitleText": "ROI 计算器",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "OmniTool",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
