@@ -49,6 +49,15 @@ export const TOOLS = [
     path: '/pages/tools/design/color-palette'
   },
   { 
+    id: 'image-compressor', 
+    nameKey: 'tools.image-compressor.name', 
+    category: 'design', 
+    emoji: '🖼️', 
+    grad: 'linear-gradient(135deg, #10b981, #059669)', 
+    descKey: 'tools.image-compressor.description',
+    path: '/pages/tools/design/image-compressor'
+  },
+  { 
     id: 'unit-converter', 
     nameKey: 'tools.unit-converter.name', 
     category: 'calc', 

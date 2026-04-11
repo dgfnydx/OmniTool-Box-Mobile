@@ -92,6 +92,13 @@
 			}
 		},
 		{
+			"path": "pages/tools/design/image-compressor",
+			"style": {
+				"navigationBarTitleText": "图片压缩",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/tools/developer/json-formatter",
 			"style": {
 				"navigationBarTitleText": "JSON 格式化",

@@ -8,6 +8,7 @@ import solarTerms from './tools/solar-terms';
 import timer from './tools/timer';
 import qrGenerator from './tools/qr-generator';
 import colorPalette from './tools/color-palette';
+import imageCompressor from './tools/image-compressor';
 import jsonFormatter from './tools/json-formatter';
 import base64Converter from './tools/base64-converter';
 import baseConverter from './tools/base-converter';
@@ -31,6 +32,7 @@ export default {
     'timer': timer,
     'qr-generator': qrGenerator,
     'color-palette': colorPalette,
+    'image-compressor': imageCompressor,
     'json-formatter': jsonFormatter,
     'base64-converter': base64Converter,
     'base-converter': baseConverter,
