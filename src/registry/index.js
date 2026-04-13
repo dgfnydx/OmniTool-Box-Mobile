@@ -236,6 +236,15 @@ export const TOOLS = [
     grad: 'linear-gradient(135deg, #10b981, #3b82f6)', 
     descKey: 'tools.image-cropper.description',
     path: '/pages/tools/design/image-cropper'
+  },
+  { 
+    id: 'font-viewer', 
+    nameKey: 'tools.font-viewer.name', 
+    category: 'design', 
+    emoji: 'Aa', 
+    grad: 'linear-gradient(135deg, #6366f1, #8b5cf6)', 
+    descKey: 'tools.font-viewer.description',
+    path: '/pages/tools/design/font-viewer'
   }
 ];
 

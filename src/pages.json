@@ -181,6 +181,13 @@
 				"navigationBarTitleText": "图片裁剪",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/tools/design/font-viewer",
+			"style": {
+				"navigationBarTitleText": "字体预览",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
