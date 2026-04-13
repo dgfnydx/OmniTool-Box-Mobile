@@ -191,6 +191,51 @@ export const TOOLS = [
     grad: 'linear-gradient(135deg, #f59e0b, #ef4444)', 
     descKey: 'tools.roi-calculator.description',
     path: '/pages/tools/daily/roi'
+  },
+  { 
+    id: 'word-counter', 
+    nameKey: 'tools.word-counter.name', 
+    category: 'design', 
+    emoji: '📝', 
+    grad: 'linear-gradient(135deg, #6366f1, #10b981)', 
+    descKey: 'tools.word-counter.description',
+    path: '/pages/tools/design/word-counter'
+  },
+  { 
+    id: 'morse-converter', 
+    nameKey: 'tools.morse-converter.name', 
+    category: 'developer', 
+    emoji: '📡', 
+    grad: 'linear-gradient(135deg, #475569, #1e293b)', 
+    descKey: 'tools.morse-converter.description',
+    path: '/pages/tools/developer/morse-converter'
+  },
+  { 
+    id: 'word-frequency', 
+    nameKey: 'tools.word-frequency.name', 
+    category: 'design', 
+    emoji: '📊', 
+    grad: 'linear-gradient(135deg, #f59e0b, #10b981)', 
+    descKey: 'tools.word-frequency.description',
+    path: '/pages/tools/design/word-frequency'
+  },
+  { 
+    id: 'image-color-picker', 
+    nameKey: 'tools.image-color-picker.name', 
+    category: 'design', 
+    emoji: '🎨', 
+    grad: 'linear-gradient(135deg, #6366f1, #ec4899)', 
+    descKey: 'tools.image-color-picker.description',
+    path: '/pages/tools/design/image-color-picker'
+  },
+  { 
+    id: 'image-cropper', 
+    nameKey: 'tools.image-cropper.name', 
+    category: 'design', 
+    emoji: '✂️', 
+    grad: 'linear-gradient(135deg, #10b981, #3b82f6)', 
+    descKey: 'tools.image-cropper.description',
+    path: '/pages/tools/design/image-cropper'
   }
 ];
 

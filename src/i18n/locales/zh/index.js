@@ -19,6 +19,11 @@ import passwordGenerator from './tools/password-generator';
 import bmiCalculator from './tools/bmi-calculator';
 import bmrCalculator from './tools/bmr-calculator';
 import roiCalculator from './tools/roi-calculator';
+import wordCounter from './tools/word-counter';
+import morseConverter from './tools/morse-converter';
+import wordFrequency from './tools/word-frequency';
+import imageColorPicker from './tools/image-color-picker';
+import imageCropper from './tools/image-cropper';
 
 export default {
   ...common,
@@ -42,6 +47,11 @@ export default {
     'password-generator': passwordGenerator,
     'bmi-calculator': bmiCalculator,
     'bmr-calculator': bmrCalculator,
-    'roi-calculator': roiCalculator
+    'roi-calculator': roiCalculator,
+    'word-counter': wordCounter,
+    'morse-converter': morseConverter,
+    'word-frequency': wordFrequency,
+    'image-color-picker': imageColorPicker,
+    'image-cropper': imageCropper
   }
 };

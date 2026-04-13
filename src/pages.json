@@ -146,6 +146,41 @@
 				"navigationBarTitleText": "ROI 计算器",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/tools/design/word-counter",
+			"style": {
+				"navigationBarTitleText": "字数统计",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/morse-converter",
+			"style": {
+				"navigationBarTitleText": "摩斯密码",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/design/word-frequency",
+			"style": {
+				"navigationBarTitleText": "词频统计",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/design/image-color-picker",
+			"style": {
+				"navigationBarTitleText": "图片取色",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/design/image-cropper",
+			"style": {
+				"navigationBarTitleText": "图片裁剪",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
