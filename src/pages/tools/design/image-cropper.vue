@@ -1,6 +1,5 @@
 <template>
   <ToolLayout :title="$t('tools.image-cropper.name')">
-    <!-- 上传/选择图片 -->
     <view v-if="!imagePath" class="upload-box card shadow-md" @tap="handleChooseImage">
       <view class="upload-icon">✂️</view>
       <text class="upload-text">{{ $t('tools.image-cropper.uploadTip') }}</text>
@@ -52,6 +51,7 @@
 
       <!-- 工具栏 -->
       <view class="toolbar card shadow-sm mt-4">
+        <!-- 比例选择 -->
         <view class="ratio-bar mb-4">
           <text class="label">{{ $t('tools.image-cropper.aspectRatio') }}</text>
           <scroll-view scroll-x class="ratio-scroll">
@@ -65,6 +65,17 @@
               >{{ r.label }}</view>
             </view>
           </scroll-view>
+        </view>
+
+        <!-- 自定义比例输入 -->
+        <view class="custom-ratio-bar mb-4">
+          <text class="label">{{ $t('tools.image-cropper.customRatio') }}</text>
+          <view class="custom-inputs">
+            <input type="number" v-model.number="customRatioW" class="ratio-input" placeholder="W" @input="onCustomRatioInput" />
+            <text class="ratio-sep">:</text>
+            <input type="number" v-model.number="customRatioH" class="ratio-input" placeholder="H" @input="onCustomRatioInput" />
+            <view class="apply-btn" @tap="applyCustomRatio">{{ $t('tools.image-cropper.apply') }}</view>
+          </view>
         </view>
 
         <view class="btn-group">
@@ -90,7 +101,7 @@ const { t } = useI18n();
 const { proxy } = getCurrentInstance();
 
 const imagePath = ref('');
-const stageHeight = ref(450);
+const stageHeight = ref(400);
 const imgOriginalWidth = ref(0);
 const imgOriginalHeight = ref(0);
 const imgDisplayWidth = ref(0);
@@ -107,6 +118,10 @@ const crop = reactive({
 // 导出尺寸
 const exportW = ref(200);
 const exportH = ref(200);
+
+// 自定义比例
+const customRatioW = ref(2);
+const customRatioH = ref(1);
 
 // 触摸状态
 let touchType = ''; // 'move', 'tl', 'tr', 'bl', 'br'
@@ -137,9 +152,8 @@ const onImageLoad = (e) => {
   imgOriginalWidth.value = width;
   imgOriginalHeight.value = height;
   
-  // 获取舞台宽度
   const sys = uni.getSystemInfoSync();
-  const screenW = sys.windowWidth - 30; // 减去 padding
+  const screenW = sys.windowWidth - 30; 
   const screenH = stageHeight.value;
   
   const ratio = width / height;
@@ -154,22 +168,6 @@ const onImageLoad = (e) => {
   resetCrop();
 };
 
-const resetCrop = () => {
-  crop.width = Math.min(imgDisplayWidth.value, imgDisplayHeight.value) * 0.8;
-  crop.height = currentRatioLabel.value === 'Free' ? crop.width : (crop.width / (getRatiosValue(currentRatioLabel.value) || 1));
-  
-  // 校验高度是否溢出
-  if (crop.height > imgDisplayHeight.value * 0.9) {
-    crop.height = imgDisplayHeight.value * 0.8;
-    if (currentRatioLabel.value !== 'Free') {
-       crop.width = crop.height * getRatiosValue(currentRatioLabel.value);
-    }
-  }
-
-  crop.left = (imgDisplayWidth.value - crop.width) / 2;
-  crop.top = (imgDisplayHeight.value - crop.height) / 2;
-};
-
 const getRatiosValue = (label) => ratios.find(r => r.label === label)?.value;
 
 const setRatio = (r) => {
@@ -177,7 +175,47 @@ const setRatio = (r) => {
   resetCrop();
 };
 
-// 触摸开始
+const onCustomRatioInput = () => {
+  currentRatioLabel.value = 'Custom';
+};
+
+const applyCustomRatio = () => {
+  if (customRatioW.value > 0 && customRatioH.value > 0) {
+    currentRatioLabel.value = 'Custom';
+    resetCrop();
+  }
+};
+
+const resetCrop = () => {
+  let ratio = 1;
+  if (currentRatioLabel.value === 'Free') {
+    ratio = 0;
+  } else if (currentRatioLabel.value === 'Custom') {
+    ratio = customRatioW.value / customRatioH.value;
+  } else {
+    ratio = getRatiosValue(currentRatioLabel.value);
+  }
+
+  crop.width = Math.min(imgDisplayWidth.value, imgDisplayHeight.value) * 0.8;
+  
+  if (ratio) {
+    crop.height = crop.width / ratio;
+    if (crop.height > imgDisplayHeight.value * 0.9) {
+      crop.height = imgDisplayHeight.value * 0.8;
+      crop.width = crop.height * ratio;
+    }
+    if (crop.width > imgDisplayWidth.value * 0.9) {
+      crop.width = imgDisplayWidth.value * 0.8;
+      crop.height = crop.width / ratio;
+    }
+  } else {
+    crop.height = crop.width;
+  }
+
+  crop.left = (imgDisplayWidth.value - crop.width) / 2;
+  crop.top = (imgDisplayHeight.value - crop.height) / 2;
+};
+
 const handleTouchStart = (e, type) => {
   touchType = type;
   const touch = e.touches[0];
@@ -186,39 +224,26 @@ const handleTouchStart = (e, type) => {
   startCrop = { ...crop };
 };
 
-// 触摸移动 (核心逻辑)
 const handleTouchMove = (e) => {
   if (!touchType) return;
   const touch = e.touches[0];
   const dx = touch.clientX - startX;
   const dy = touch.clientY - startY;
-  
   const minSize = 40;
 
   if (touchType === 'move') {
-    let nextLeft = startCrop.left + dx;
-    let nextTop = startCrop.top + dy;
-    
-    // 边界检测
-    nextLeft = Math.max(0, Math.min(nextLeft, imgDisplayWidth.value - crop.width));
-    nextTop = Math.max(0, Math.min(nextTop, imgDisplayHeight.value - crop.height));
-    
+    let nextLeft = Math.max(0, Math.min(startCrop.left + dx, imgDisplayWidth.value - crop.width));
+    let nextTop = Math.max(0, Math.min(startCrop.top + dy, imgDisplayHeight.value - crop.height));
     crop.left = nextLeft;
     crop.top = nextTop;
   } else {
-    // 缩放逻辑
-    let newW = startCrop.width;
-    let newH = startCrop.height;
-    let newL = startCrop.left;
-    let newT = startCrop.top;
-    
-    const ratio = getRatiosValue(currentRatioLabel.value);
+    let newW = crop.width, newH = crop.height, newL = crop.left, newT = crop.top;
+    const ratio = (currentRatioLabel.value === 'Free') ? 0 : (currentRatioLabel.value === 'Custom' ? customRatioW.value / customRatioH.value : getRatiosValue(currentRatioLabel.value));
 
     if (touchType === 'br') {
       newW = Math.max(minSize, startCrop.width + dx);
       newH = ratio ? newW / ratio : Math.max(minSize, startCrop.height + dy);
     } else if (touchType === 'tl') {
-      const delta = Math.min(dx, dy); // 简化比例缩放
       newW = Math.max(minSize, startCrop.width - dx);
       newL = startCrop.left + (startCrop.width - newW);
       newH = ratio ? newW / ratio : Math.max(minSize, startCrop.height - dy);
@@ -233,44 +258,29 @@ const handleTouchMove = (e) => {
       newH = ratio ? newW / ratio : Math.max(minSize, startCrop.height + dy);
     }
 
-    // 边界约束与二次校验
-    if (newL < 0) { newW += newL; newL = 0; if(ratio) newH = newW / ratio; }
-    if (newT < 0) { newH += newT; newT = 0; if(ratio) newW = newH * ratio; }
-    if (newL + newW > imgDisplayWidth.value) { newW = imgDisplayWidth.value - newL; if(ratio) newH = newW / ratio; }
-    if (newT + newH > imgDisplayHeight.value) { newH = imgDisplayHeight.value - newT; if(ratio) newW = newH * ratio; }
+    if (newL < 0 || newT < 0 || newL + newW > imgDisplayWidth.value || newT + newH > imgDisplayHeight.value) return;
 
-    crop.width = newW;
-    crop.height = newH;
-    crop.left = newL;
-    crop.top = newT;
+    crop.width = newW; crop.height = newH; crop.left = newL; crop.top = newT;
   }
 };
 
 const handleConfirm = () => {
   uni.showLoading({ title: '正在处理...' });
-  
-  // 计算原始比例坐标
   const scale = imgOriginalWidth.value / imgDisplayWidth.value;
   const sX = crop.left * scale;
   const sY = crop.top * scale;
   const sW = crop.width * scale;
   const sH = crop.height * scale;
   
-  // 设置 Canvas 尺寸为裁剪大小
-  exportW.value = sW;
-  exportH.value = sH;
+  exportW.value = sW; exportH.value = sH;
   
   const ctx = uni.createCanvasContext('crop-canvas', proxy);
-  
-  // drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh)
   ctx.drawImage(imagePath.value, sX, sY, sW, sH, 0, 0, sW, sH);
-  
   ctx.draw(false, () => {
     setTimeout(() => {
       uni.canvasToTempFilePath({
         canvasId: 'crop-canvas',
-        destWidth: sW,
-        destHeight: sH,
+        destWidth: sW, destHeight: sH,
         success: (res) => {
           uni.hideLoading();
           // #ifdef H5
@@ -279,7 +289,6 @@ const handleConfirm = () => {
           link.download = `crop_${Date.now()}.png`;
           link.click();
           // #endif
-          
           // #ifndef H5
           uni.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
@@ -288,10 +297,7 @@ const handleConfirm = () => {
           });
           // #endif
         },
-        fail: () => {
-          uni.hideLoading();
-          uni.showToast({ title: '裁剪失败', icon: 'none' });
-        }
+        fail: () => { uni.hideLoading(); uni.showToast({ title: '裁剪失败', icon: 'none' }); }
       }, proxy);
     }, 300);
   });
@@ -309,75 +315,45 @@ const handleConfirm = () => {
 .image-container { position: relative; }
 .base-img { display: block; }
 
-/* 裁剪框 */
-.crop-box {
-  position: absolute;
-  border: 2rpx solid #ffffff;
-  z-index: 100;
-  box-sizing: border-box;
-}
+.crop-box { position: absolute; border: 2rpx solid #ffffff; z-index: 100; box-sizing: border-box; }
+.mask { position: absolute; background: rgba(0, 0, 0, 0.6); z-index: 50; pointer-events: none; }
+.mask.top { top: 0; left: 0; width: 100%; }
+.mask.bottom { left: 0; bottom: 0; width: 100%; }
+.mask.left { left: 0; }
+.mask.right { right: 0; }
 
-/* 遮罩层 */
-.mask { position: absolute; background: rgba(0, 0, 0, 0.6); z-index: 50; pointer-events: none; width: 100%; }
-.mask.left, .mask.right { width: auto; }
-.mask.top { top: 0; left: 0; }
-.mask.bottom { left: 0; bottom: 0; }
-
-/* 内部线 */
 .grid-v, .grid-h { position: absolute; background: rgba(255, 255, 255, 0.3); pointer-events: none; }
 .v1 { left: 33.3%; top: 0; width: 1px; height: 100%; }
 .v2 { left: 66.6%; top: 0; width: 1px; height: 100%; }
 .h1 { top: 33.3%; left: 0; height: 1px; width: 100%; }
 .h2 { top: 66.6%; left: 0; height: 1px; width: 100%; }
 
-/* 把手 */
-.handle {
-  position: absolute;
-  width: 44rpx;
-  height: 44rpx;
-  background: transparent;
-  z-index: 110;
-}
-.handle::after {
-  content: '';
-  position: absolute;
-  width: 16rpx;
-  height: 16rpx;
-  background: #6366f1;
-  border: 4rpx solid #ffffff;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.tl { top: -22rpx; left: -22rpx; cursor: nw-resize; }
-.tr { top: -22rpx; right: -22rpx; cursor: ne-resize; }
-.bl { bottom: -22rpx; left: -22rpx; cursor: sw-resize; }
-.br { bottom: -22rpx; right: -22rpx; cursor: se-resize; }
+.handle { position: absolute; width: 44rpx; height: 44rpx; z-index: 110; }
+.handle::after { content: ''; position: absolute; width: 16rpx; height: 16rpx; background: #6366f1; border: 4rpx solid #ffffff; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.tl { top: -22rpx; left: -22rpx; }
+.tr { top: -22rpx; right: -22rpx; }
+.bl { bottom: -22rpx; left: -22rpx; }
+.br { bottom: -22rpx; right: -22rpx; }
 
 .toolbar { padding: 30rpx; }
 .ratio-bar { display: flex; flex-direction: column; gap: 20rpx; }
-.label { font-size: 24rpx; color: #94a3b8; font-weight: 700; }
+.label { font-size: 24rpx; color: #94a3b8; font-weight: 700; margin-bottom: 10rpx; display: block; }
 .ratio-list { display: flex; gap: 16rpx; padding-bottom: 10rpx; }
-.ratio-item {
-  padding: 10rpx 30rpx;
-  background: #f1f5f9;
-  border-radius: 100rpx;
-  font-size: 24rpx;
-  color: #64748b;
-  white-space: nowrap;
-}
+.ratio-item { padding: 10rpx 30rpx; background: #f1f5f9; border-radius: 100rpx; font-size: 24rpx; color: #64748b; white-space: nowrap; }
 .ratio-item.active { background: #6366f1; color: white; }
 
-.btn-group { display: flex; gap: 20rpx; }
+.custom-ratio-bar { display: flex; flex-direction: column; gap: 16rpx; }
+.custom-inputs { display: flex; align-items: center; gap: 12rpx; }
+.ratio-input { width: 100rpx; height: 60rpx; background: #f1f5f9; border-radius: 8rpx; text-align: center; font-size: 24rpx; }
+.ratio-sep { color: #94a3b8; font-weight: bold; }
+.apply-btn { padding: 0 30rpx; height: 60rpx; line-height: 60rpx; background: #eef2ff; color: #6366f1; border-radius: 8rpx; font-size: 24rpx; font-weight: 600; }
+
+.btn-group { display: flex; gap: 20rpx; margin-top: 20rpx; }
 .action-btn { flex: 1; height: 80rpx; background: #f8fafc; border: 2rpx solid #e2e8f0; border-radius: 16rpx; display: flex; align-items: center; justify-content: center; font-size: 26rpx; font-weight: 600; }
 .action-btn.delete { color: #ef4444; border-color: #fee2e2; }
 
 .confirm-btn { width: 100%; height: 100rpx; background: #6366f1; color: white; border-radius: 20rpx; font-size: 32rpx; font-weight: 700; margin-top: 30rpx; display: flex; align-items: center; justify-content: center; box-shadow: 0 10rpx 20rpx rgba(99, 102, 241, 0.2); }
 
 .hidden-canvas { position: fixed; left: -9999px; visibility: hidden; }
-.mt-4 { margin-top: 30rpx; }
 .mb-4 { margin-bottom: 30rpx; }
-.shadow-sm { box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.02); }
 </style>
