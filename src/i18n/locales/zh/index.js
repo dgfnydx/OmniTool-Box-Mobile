@@ -25,6 +25,7 @@ import wordFrequency from './tools/word-frequency';
 import imageColorPicker from './tools/image-color-picker';
 import imageCropper from './tools/image-cropper';
 import fontViewer from './tools/font-viewer';
+import markdownPreviewer from './tools/markdown-previewer';
 
 export default {
   ...common,
@@ -54,6 +55,7 @@ export default {
     'word-frequency': wordFrequency,
     'image-color-picker': imageColorPicker,
     'image-cropper': imageCropper,
-    'font-viewer': fontViewer
+    'font-viewer': fontViewer,
+    'markdown-previewer': markdownPreviewer
   }
 };

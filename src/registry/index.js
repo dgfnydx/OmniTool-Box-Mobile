@@ -245,6 +245,15 @@ export const TOOLS = [
     grad: 'linear-gradient(135deg, #6366f1, #8b5cf6)', 
     descKey: 'tools.font-viewer.description',
     path: '/pages/tools/design/font-viewer'
+  },
+  { 
+    id: 'markdown-previewer', 
+    nameKey: 'tools.markdown-previewer.name', 
+    category: 'design', 
+    emoji: '📝', 
+    grad: 'linear-gradient(135deg, #1e293b, #475569)', 
+    descKey: 'tools.markdown-previewer.description',
+    path: '/pages/tools/design/markdown-previewer'
   }
 ];
 

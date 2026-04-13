@@ -188,6 +188,13 @@
 				"navigationBarTitleText": "字体预览",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/tools/design/markdown-previewer",
+			"style": {
+				"navigationBarTitleText": "Markdown 预览",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
