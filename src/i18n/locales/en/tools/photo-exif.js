@@ -1,0 +1,20 @@
+export default {
+  name: 'Photo EXIF',
+  description: 'Extract and view EXIF metadata (camera settings, GPS, etc.) from image files.',
+  upload: 'Upload Photo',
+  uploadPlaceholder: 'Tap to select photo',
+  basicInfo: 'Basic Info',
+  exifInfo: 'EXIF Metadata',
+  gpsInfo: 'GPS Location',
+  filename: 'Filename',
+  filesize: 'File Size',
+  cameraModel: 'Camera Model',
+  exposure: 'Exposure',
+  iso: 'ISO',
+  focalLength: 'Focal Length',
+  dateTime: 'Date Time',
+  latitude: 'Latitude',
+  longitude: 'Longitude',
+  noExif: 'No EXIF data found in this image.',
+  viewMap: 'View on Maps'
+};

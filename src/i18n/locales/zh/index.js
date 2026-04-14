@@ -25,7 +25,10 @@ import wordFrequency from './tools/word-frequency';
 import imageColorPicker from './tools/image-color-picker';
 import imageCropper from './tools/image-cropper';
 import fontViewer from './tools/font-viewer';
+import photoExif from './tools/photo-exif';
 import markdownPreviewer from './tools/markdown-previewer';
+import docComparator from './tools/doc-comparator';
+import tokenCounter from './tools/token-counter';
 
 export default {
   ...common,
@@ -56,6 +59,9 @@ export default {
     'image-color-picker': imageColorPicker,
     'image-cropper': imageCropper,
     'font-viewer': fontViewer,
-    'markdown-previewer': markdownPreviewer
+    'photo-exif': photoExif,
+    'markdown-previewer': markdownPreviewer,
+    'doc-comparator': docComparator,
+    'token-counter': tokenCounter
   }
 };

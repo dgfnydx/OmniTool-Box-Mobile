@@ -56,18 +56,30 @@ importers:
       '@dcloudio/uni-quickapp-webview':
         specifier: 3.0.0-5000620260331001
         version: 3.0.0-5000620260331001(postcss@8.5.9)(rollup@4.60.1)(vue@3.5.32)
+      base64-js:
+        specifier: ^1.5.1
+        version: 1.5.1
       colord:
         specifier: ^2.9.3
         version: 2.9.3
       cropperjs:
         specifier: ^1.6.2
         version: 1.6.2
+      diff:
+        specifier: ^9.0.0
+        version: 9.0.0
       dijkstrajs:
         specifier: ^1.0.3
         version: 1.0.3
+      exifr:
+        specifier: ^7.1.3
+        version: 7.1.3
       js-base64:
         specifier: ^3.7.8
         version: 3.7.8
+      js-tiktoken:
+        specifier: ^1.0.21
+        version: 1.0.21
       lunar-javascript:
         specifier: ^1.7.7
         version: 1.7.7
@@ -2025,6 +2037,10 @@ packages:
     resolution: {integrity: sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
 
+  diff@9.0.0:
+    resolution: {integrity: sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==}
+    engines: {node: '>=0.3.1'}
+
   dijkstrajs@1.0.3:
     resolution: {integrity: sha512-qiSlmBq9+BCdCA/L46dw8Uy93mloxsPSbwnm5yrKn2vMPiy8KyAskTF6zuV/j5BMsmOGZDPs7KjU+mjb670kfA==}
 
@@ -2149,6 +2165,9 @@ packages:
 
   exif-parser@0.1.12:
     resolution: {integrity: sha512-c2bQfLNbMzLPmzQuOr8fy0csy84WmwnER81W88DzTp9CYNPJ6yzOj2EZAh9pywYpqHnshVLHQJ8WzldAyfY+Iw==}
+
+  exifr@7.1.3:
+    resolution: {integrity: sha512-g/aje2noHivrRSLbAUtBPWFbxKdKhgj/xr1vATDdUXPOFYJlQ62Ft0oy+72V6XLIpDJfHs6gXLbBLAolqOXYRw==}
 
   exit@0.1.2:
     resolution: {integrity: sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==}
@@ -2581,6 +2600,9 @@ packages:
 
   js-base64@3.7.8:
     resolution: {integrity: sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow==}
+
+  js-tiktoken@1.0.21:
+    resolution: {integrity: sha512-biOj/6M5qdgx5TKjDnFT1ymSpM5tbd3ylwDtrQvFQSu0Z7bBYko2dF+W/aUkXUPuk6IVpRxk/3Q2sHOzGlS36g==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -6415,6 +6437,8 @@ snapshots:
 
   diff-sequences@27.5.1: {}
 
+  diff@9.0.0: {}
+
   dijkstrajs@1.0.3: {}
 
   dom-walk@0.1.2: {}
@@ -6537,6 +6561,8 @@ snapshots:
       strip-final-newline: 2.0.0
 
   exif-parser@0.1.12: {}
+
+  exifr@7.1.3: {}
 
   exit@0.1.2: {}
 
@@ -7220,6 +7246,10 @@ snapshots:
   jpeg-js@0.3.7: {}
 
   js-base64@3.7.8: {}
+
+  js-tiktoken@1.0.21:
+    dependencies:
+      base64-js: 1.5.1
 
   js-tokens@4.0.0: {}
 

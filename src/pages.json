@@ -190,9 +190,30 @@
 			}
 		},
 		{
+			"path": "pages/tools/design/photo-exif",
+			"style": {
+				"navigationBarTitleText": "照片信息提取",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/tools/design/markdown-previewer",
 			"style": {
 				"navigationBarTitleText": "Markdown 预览",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/doc-comparator",
+			"style": {
+				"navigationBarTitleText": "文本对比",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/tools/developer/token-counter",
+			"style": {
+				"navigationBarTitleText": "Token 计算器",
 				"navigationStyle": "custom"
 			}
 		}

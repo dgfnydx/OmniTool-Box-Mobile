@@ -247,6 +247,15 @@ export const TOOLS = [
     path: '/pages/tools/design/font-viewer'
   },
   { 
+    id: 'photo-exif', 
+    nameKey: 'tools.photo-exif.name', 
+    category: 'design', 
+    emoji: '📸', 
+    grad: 'linear-gradient(135deg, #0ea5e9, #2563eb)', 
+    descKey: 'tools.photo-exif.description',
+    path: '/pages/tools/design/photo-exif'
+  },
+  { 
     id: 'markdown-previewer', 
     nameKey: 'tools.markdown-previewer.name', 
     category: 'design', 
@@ -254,6 +263,24 @@ export const TOOLS = [
     grad: 'linear-gradient(135deg, #1e293b, #475569)', 
     descKey: 'tools.markdown-previewer.description',
     path: '/pages/tools/design/markdown-previewer'
+  },
+  { 
+    id: 'doc-comparator', 
+    nameKey: 'tools.doc-comparator.name', 
+    category: 'developer', 
+    emoji: '对比', 
+    grad: 'linear-gradient(135deg, #6366f1, #10b981)', 
+    descKey: 'tools.doc-comparator.description',
+    path: '/pages/tools/developer/doc-comparator'
+  },
+  { 
+    id: 'token-counter', 
+    nameKey: 'tools.token-counter.name', 
+    category: 'developer', 
+    emoji: 'TK', 
+    grad: 'linear-gradient(135deg, #8b5cf6, #3b82f6)', 
+    descKey: 'tools.token-counter.description',
+    path: '/pages/tools/developer/token-counter'
   }
 ];
 

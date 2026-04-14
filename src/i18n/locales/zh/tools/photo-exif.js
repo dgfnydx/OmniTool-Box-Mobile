@@ -1,0 +1,20 @@
+export default {
+  name: '照片信息提取',
+  description: '提取并查看图像文件中的 EXIF 元数据（拍摄参数、GPS等）。',
+  upload: '上传照片',
+  uploadPlaceholder: '点击选择照片提取信息',
+  basicInfo: '基本信息',
+  exifInfo: 'EXIF 元数据',
+  gpsInfo: 'GPS 地理位置',
+  filename: '文件名',
+  filesize: '文件大小',
+  cameraModel: '相机型号',
+  exposure: '曝光时间',
+  iso: 'ISO 感光度',
+  focalLength: '焦距',
+  dateTime: '拍摄时间',
+  latitude: '纬度',
+  longitude: '经度',
+  noExif: '该图片中未找到 EXIF 数据。',
+  viewMap: '在地图中查看'
+};
